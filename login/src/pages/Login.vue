@@ -1,169 +1,226 @@
-<script >
-
+<script>
+import { Post } from "../utils/api.js";
+export default {
+name: "App",
+data() {
+  return {
+    username: "",
+    password: "",
+  };
+},
+methods: {
+  async login() {
+    if (this.username && this.password) {
+      let response = await Post("login", {
+        username: this.username,
+        password: this.password,
+      });
+      if (response.msg === "Dang nhap thanh cong") {
+        this.$router.push("/");
+        isLogin = true;
+      } else {
+        alert("Sai tai khoan mat khau");
+      }
+    }
+  },
+},
+};
 </script>
 
 <template>
-  <div id="home">
-    <div id="login-form">
-      <div class="login-form-header">
-        <span class="title-header">Đăng nhập</span>
-        <span class="title-close">X</span>
+<div id="home">
+  <div id="login-form">
+    <div class="login-form-header">
+      <span class="title-header">Đăng nhập</span>
+      <span style="position: absolute; top: 19px; right: 19px">X</span>
+    </div>
+    <div id="login-body">
+      <div class="label-input">Tên đăng nhập</div>
+      <input type="text" v-model="username" />
+      <div
+        style="
+          margin-top: 40px;
+          display: flex;
+          justify-content: space-between;
+          width: 462px;
+        "
+      >
+        <span class="label-input">Mật khẩu</span
+        ><span
+          ><a href="google.com" id="forgot-password">Quên mật khẩu?</a></span
+        >
       </div>
-      <div id="login-body">
-        <div class="label-input">Tên đăng nhập</div>
-        <input type="" />
-        <div class="label-input">
-          Mật khẩu <span><a href="google.com" id="forgot-password">Quên mật khẩu?</a></span></div>
-        <input type="password" />
+      <input type="password" v-model="password" />
+      <div
+        class="login-button"
+        @click="login()"
+        :style="
+          this.username && this.password
+            ? {}
+            : { color: '#E5E6EC', background: '#BDBDBD' }
+        "
+      >
+        Đăng nhập
       </div>
-      <div class="login-button">Đăng nhập</div>
       <p class="login-with">hoặc đăng nhập bằng</p>
-      <button class="otherway"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512">
-          <style>
-            svg {
-              fill: #006eff
-            }
-          </style>
-          <path
-            d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" />
-        </svg>Facebook</button>
-      <button class="otherway"><i class="fa fa-brands fa-google"></i>Google</button>
+      <div
+        style="
+          display: flex;
+          justify-content: space-around;
+          padding-top: 10px;
+        "
+      >
+        <span class="otherway"
+          ><i
+            class="fa fa-brands fa-facebook"
+            style="font-size: 16px; padding-right: 5px"
+          ></i
+          >Facebook</span
+        >
+        <span class="otherway"
+          ><i
+            class="fa fa-brands fa-google"
+            style="font-size: 16px; padding-right: 5px"
+          ></i
+          >Google</span
+        >
+      </div>
       <p class="footer">
-        Bạn chưa có tài khoản? <a href="google.com">Đăng ký ngay!</a>
+        Bạn chưa có tài khoản?
+        <router-link to="/register">Đăng ký ngay!</router-link>
       </p>
     </div>
-
-</div></template>
+  </div>
+</div>
+</template>
 
 <style>
 body {
-    background: #f0f2f5;
-    display: flex;
-    width: 1440px;
-    
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #login-form {
-    width: 600px;
-    height: 589px;
-    border-radius: 14px;
-    background: var(--light-greyscale-greyscale-200, #fff);
-    box-shadow: 0px 12px 40px 0px rgba(0, 0, 0, 0.16);
-  }
-  
-  .login-form-header {
-    position: relative;
-    max-height: 58.264px;
-    border-bottom: 1px solid #f7f7f7;
-    padding: 16px 240px 18.26px 240px;
-  }
-  
-  .title-header {
-    padding-top: 16px;
-    color: var(--light-greyscale-greyscale-900, #000);
-    font-family: Roboto;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 133.333% */
-    text-transform: uppercase;
-  }
-  
-  #login-body {
-    padding: 36.74px 80px 0px 80px;
-  }
-  
-  .label-input {
-    display:flex;
-    color: var(--light-greyscale-greyscale-900, #000);
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 22px; /* 137.5% */
-    justify-content:space-between;
-  }
-  
-  #login-body input {
-    display: flex;
-    width: 440px;
-    height: 22px;
-    padding: 16px 15px;
-    align-items: flex-start;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    background: #f7f7f7;
-    border: 0px;
-  }
-  
-  #forgot-password {
-    color: var(--dark-other-link-500, #2f80ed);
-    text-align: right;
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 22px; /* 137.5% */
-  }
-  
-  .login-button {
-    margin-top: 40px;
-    margin-left:80px;
-    display: flex;
-    width: 440px;
-    height: 20px;
-    padding: 15px 15px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 40px;
-    background: var(--Green, #00bf6f);
-    box-shadow: 0px 2px 10px 0px rgba(244, 103, 0, 0.05);
-  
-    color: var(--light-text-active, #fff);
-    text-align: center;
-    /* GG/16px/Med/Button Text */
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-  
-  .login-with {
-    margin-top: 30px;
-    color: var(--light-transparent-greyscale-65, rgba(0, 0, 0, 0.65));
-    text-align: center;
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.192px;
-  }
-  
-  .otherway {
-    flex-direction:column;
-    margin-left:80px;
-    flex-shrink: 0;
-    border-radius: 24px;
-    background: var(--light-greyscale-greyscale-300, #e5e6ec);
-    color: var(--light-greyscale-greyscale-900, #000);
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-align: center;
-    padding: 13.02px 55px 13px 55px;
-  }
-  
-  .footer {
-    text-align: center;
-  }
-  
+background: #f0f2f5;
+display: flex;
+width: 1440px;
+/* padding: 156px 420px 279px 420px; */
+justify-content: center;
+align-items: center;
+}
+
+#login-form {
+width: 600px;
+height: 589px;
+border-radius: 14px;
+background: var(--light-greyscale-greyscale-200, #fff);
+box-shadow: 0px 12px 40px 0px rgba(0, 0, 0, 0.16);
+}
+
+.login-form-header {
+position: relative;
+max-height: 58.264px;
+border-bottom: 1px solid #f7f7f7;
+padding: 16px 240px 18.26px 240px;
+}
+
+.title-header {
+padding-top: 16px;
+color: var(--light-greyscale-greyscale-900, #000);
+font-family: Roboto;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 133.333% */
+text-transform: uppercase;
+}
+
+#login-body {
+padding: 36.74px 80px 0px 80px;
+}
+
+.label-input {
+color: var(--light-greyscale-greyscale-900, #000);
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 22px; /* 137.5% */
+}
+
+#login-body input {
+display: flex;
+width: 440px;
+height: 22px;
+padding: 16px 15px;
+align-items: flex-start;
+gap: 10px;
+flex-shrink: 0;
+border-radius: 8px;
+background: #f7f7f7;
+border: 0px;
+}
+
+#forgot-password {
+color: var(--dark-other-link-500, #2f80ed);
+text-align: right;
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 22px; /* 137.5% */
+}
+
+.login-button {
+margin-top: 40px;
+display: flex;
+width: 440px;
+height: 20px;
+padding: 15px 15px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+border-radius: 40px;
+background:  #00bf6f;
+box-shadow: 0px 2px 10px 0px rgba(244, 103, 0, 0.05);
+
+color: var(--light-text-active, #fff);
+text-align: center;
+/* GG/16px/Med/Button Text */
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.login-button:hover {
+cursor: pointer;
+}
+.login-with {
+margin-top: 30px;
+color: var(--light-transparent-greyscale-65, rgba(0, 0, 0, 0.65));
+text-align: center;
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.192px;
+}
+
+.otherway {
+flex-shrink: 0;
+border-radius: 24px;
+background: var(--light-greyscale-greyscale-300, #e5e6ec);
+
+color: var(--light-greyscale-greyscale-900, #000);
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-align: center;
+padding: 13.02px 55px 13px 55px;
+}
+
+.footer {
+margin-top: 51px;
+text-align: center;
+}
 </style>

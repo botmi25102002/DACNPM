@@ -4,7 +4,7 @@
   <div id="home">
     <div id="login-form">
       <div class="login-form-header">
-        <span class="title-header">Đăng ky</span>
+        <span class="title-header">đăng ký``</span>
         <span style="position: absolute; top: 19px; right: 19px">X</span>
       </div>
       <div id="login-body">
@@ -49,7 +49,8 @@
           >
         </div>
         <p class="footer">
-          Bạn chưa có tài khoản? <a href="google.com">Đăng ký ngay!</a>
+          Có tài khoản rồi?
+          <router-link to="/login">Đăng nhập ngay!</router-link>
         </p>
       </div>
     </div>
