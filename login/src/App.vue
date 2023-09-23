@@ -1,38 +1,11 @@
-<script >
-
+<script>
+export default {
+  name: "App",
+};
 </script>
 
 <template>
-  <!-- <div id="home">
-    <div id="login-form">
-      <div class="login-form-header">
-        <span class="title-header">Đăng nhập</span>
-        <span class="title-close">X</span>
-      </div>
-      <div id="login-body">
-        <div class="label-input">Tên đăng nhập</div>
-        <input type="" />
-        <div class="label-input">
-          Mật khẩu <span><a href="google.com" id="forgot-password">Quên mật khẩu?</a></span></div>
-        <input type="password" />
-      </div>
-      <div class="login-button">Đăng nhập</div>
-      <p class="login-with">hoặc đăng nhập bằng</p>
-      <button class="otherway"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512">
-          <style>
-            svg {
-              fill: #006eff
-            }
-          </style>
-          <path
-            d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z" />
-        </svg>Facebook</button>
-      <button class="otherway"><i class="fa fa-brands fa-google"></i>Google</button>
-      <p class="footer">
-        Bạn chưa có tài khoản? <a href="google.com">Đăng ký ngay!</a>
-      </p>
-    </div> </div>-->
-
+  <router-view />
 </template>
 
 <style></style>
